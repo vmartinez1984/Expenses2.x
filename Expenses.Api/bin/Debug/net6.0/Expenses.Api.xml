@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Expenses.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Get">
+            <summary>
+            Get list of categories
+            </summary>
+            <returns></returns>
+            <returns>List of categories</returns>
+            <response code="200">List of categories</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.GetByCategory(System.String)">
+            <summary>
+            Get list of subcategories from category
+            </summary>
+            <param name="categoryId">categoryId 24 characteres</param>
+            <returns>List of subcategories</returns>
+            <response code="200">Subcategories</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Get(System.String)">
+            <summary>
+            Get category by id
+            </summary>
+            <param name="id">categoryId</param>
+            <returns>Category</returns>
+            <response code="200">Category</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Post(Expenses.Core.Dtos.CategoryDtoIn)">
+            <summary>
+            Add category
+            </summary>
+            <returns>Id</returns>
+            <response code="201">Category created</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Put(System.String,Expenses.Core.Dtos.CategoryDtoIn)">
+            <summary>
+            Update category
+            </summary>
+            <returns>Id</returns>
+            <response code="202">Category updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Delete(System.String)">
+            <summary>
+            Delete category
+            </summary>
+            <returns>Id</returns>
+            <response code="204">Category updated</response>
+        </member>
+    </members>
+</doc>

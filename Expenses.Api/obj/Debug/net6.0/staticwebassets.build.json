@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "IHfxQIJc3mWVmyCToazMRpdI25eSC7tY9zc60dzov9M=",
+  "Source": "Expenses.Api",
+  "BasePath": "_content/Expenses.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
