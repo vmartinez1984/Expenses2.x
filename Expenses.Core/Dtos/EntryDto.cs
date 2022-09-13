@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Expenses.Core.Validators;
 
 namespace Expenses.Core.Dtos
 {
@@ -13,6 +14,9 @@ namespace Expenses.Core.Dtos
         public decimal Amount { get; set; }
         
         [Required]
+        [MaxLength(24)]
+        [MinLength(24)]
+        [PeriodExists]
         public string PeriodId { get; set; }
     }
 

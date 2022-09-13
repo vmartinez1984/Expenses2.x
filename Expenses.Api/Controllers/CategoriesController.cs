@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Expenses.Api.Controllers;
 
+/// <summary>
+/// Categories
+/// </summary>
 [ApiController]
 [Route("Api/[controller]")]
 public class CategoriesController : ControllerBase

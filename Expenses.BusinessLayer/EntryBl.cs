@@ -3,7 +3,6 @@ using Expenses.Core.Dtos;
 using Expenses.Core.Entities;
 using Expenses.Core.Interfaces.BusinessLayer;
 using Expenses.Core.Interfaces.Repository;
-using MongoDB.Bson;
 
 namespace Expenses.BusinessLayer
 {
@@ -24,24 +23,16 @@ namespace Expenses.BusinessLayer
         public async Task<string> AddAsync(EntryDtoIn item)
         {
             EntryEntity entity;
-            PeriodEntity periodEntity;
 
             entity = _mapper.Map<EntryEntity>(item);
-            entity.Id = ObjectId.GenerateNewId().ToString();
-            periodEntity = await _repository.Period.GetAsync(item.PeriodId);
-            if (periodEntity.ListEntries is null)
-                periodEntity.ListEntries = new List<EntryEntity>();
-            periodEntity.ListEntries.Add(entity);
-            periodEntity.TotalEntries = periodEntity.ListEntries.Sum(x => x.Amount);
-
-            await _repository.Period.UpdateAsync(periodEntity);
+            entity.Id = await _repository.Entry.AddAsync(item.PeriodId, entity);
 
             return entity.Id;
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(string entryId)
         {
-            throw new NotImplementedException();
+            await _repository.Period.DeleteEntryAsync(entryId);
         }
 
         public async Task<List<EntryDto>> GetAllAsync(string periodId)
@@ -55,19 +46,30 @@ namespace Expenses.BusinessLayer
             return list;
         }
 
-        public async Task<EntryDto> GetAsync(string id)
+        public async Task<EntryDto> GetAsync(string entryId)
         {
-            throw new NotImplementedException();
-        }
+            EntryEntity entity;
+            EntryDto item;
+            PeriodEntity periodEntity;
 
-        public async Task<List<EntryDto>> GetAsync()
-        {
-            throw new NotImplementedException();
+            periodEntity = await _repository.Period.GetByEntryIdAsync(entryId);
+            entity = periodEntity.ListEntries.Where(x => x.Id == entryId).FirstOrDefault();
+            item = _mapper.Map<EntryDto>(entity);
+            if (entity is not null)
+                item.PeriodId = periodEntity.Id;
+
+            return item;
         }
 
         public async Task UpdateAsync(string id, EntryDtoIn item)
         {
-            throw new NotImplementedException();
+            EntryEntity entity;
+
+            entity = await _repository.Entry.GetAsync(id);
+            entity.Amount = item.Amount;
+            entity.Name = item.Name;
+
+            await _repository.Entry.UpdateAsync(entity);
         }
     }
 }

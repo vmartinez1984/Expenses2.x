@@ -60,6 +60,22 @@ namespace Expenses.Repository
             return entity;
         }
 
+        public async Task<EntryEntity> GetEntryAsync(string entryId)
+        {
+            BsonDocument bsonElements;
+            PeriodEntity periodEntity;
+            EntryEntity entity;
+
+            bsonElements = BsonSerializer.Deserialize<BsonDocument>($"{{'ListEntries._id': ObjectId('{entryId}')}}");
+            periodEntity = await _collection.Find(bsonElements).FirstOrDefaultAsync();
+            if (periodEntity is null)
+                entity = null;
+            else
+                entity = periodEntity.ListEntries.Where(x => x.Id == entryId).FirstOrDefault();
+
+            return entity;
+        }
+
         public async Task<ExpenseEntity> GetExpenseAsync(string id)
         {
             //{"ListEntries._id": ObjectId('631a74a1a11bb6bc7e73b691')}
@@ -77,17 +93,44 @@ namespace Expenses.Repository
             return expenseEntity;
         }
 
-        // public async Task<ExpenseEntity> GetExpenseAsync(string expenseId)
-        // {
-        //     ExpenseEntity expenseEntity;
-
-        //     expenseEntity = await _collection.Find().FirstOrDefault();
-        // }
-
         public async Task UpdateAsync(PeriodEntity entity)
         {
             await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
         }
 
+        public bool Exists(string periodId)
+        {
+            long count;
+
+            count = _collection.CountDocuments(x => x.Id == periodId);
+
+            return count == 0 ? false : true;
+        }
+
+        public async Task<PeriodEntity> GetByEntryIdAsync(string entryId)
+        {
+            BsonDocument bsonElements;
+            PeriodEntity periodEntity;
+
+            bsonElements = BsonSerializer.Deserialize<BsonDocument>($"{{'ListEntries._id': ObjectId('{entryId}')}}");
+            periodEntity = await _collection.Find(bsonElements).FirstOrDefaultAsync();
+            periodEntity.ListEntries = periodEntity.ListEntries.Where(x=>x.IsActive == true).ToList();
+
+            return periodEntity;
+        }
+
+        public async Task DeleteEntryAsync(string entryId)
+        {
+            BsonDocument bsonElements;
+            PeriodEntity periodEntity;
+            int index;
+
+            bsonElements = BsonSerializer.Deserialize<BsonDocument>($"{{'ListEntries._id': ObjectId('{entryId}')}}");
+            periodEntity = await _collection.Find(bsonElements).FirstOrDefaultAsync();
+             index =  periodEntity.ListEntries.FindIndex(x=>x.Id == entryId);            
+            periodEntity.ListEntries[index].IsActive = false;
+
+            await UpdateAsync(periodEntity);
+        }
     }//end class
 }

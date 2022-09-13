@@ -35,6 +35,15 @@ namespace Expenses.BusinessLayer
             await _repository.Category.DeleteAsync(id);
         }
 
+        public bool Exists(string periodId)
+        {
+            bool exists;
+
+            exists =  _repository.Period.Exists(periodId);
+
+            return exists;
+        }
+
         public async Task<PeriodDto> GetAsync(string id)
         {
             PeriodEntity entity;

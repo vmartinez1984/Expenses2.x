@@ -14,6 +14,7 @@ builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSetti
 builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
+builder.Services.AddScoped<IEntryRepository, EntryRepository>();
 builder.Services.AddScoped<IRepository,Repository>();
 builder.Services.AddScoped<IPeriodBl, PeriodBl>();
 builder.Services.AddScoped<IEntryBl, EntryBl>();

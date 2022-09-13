@@ -62,6 +62,7 @@ namespace Expenses.Core.Interfaces.BusinessLayer
         Task<PeriodDto> GetAsync(string id);
         Task<string> AddAsync(PeriodDtoIn period);
         Task UpdateAsync(string id, PeriodDto period);
+        bool Exists(string periodId);
     }
 
     public interface ICategoryBl : IBaseBl<CategoryDtoIn, CategoryDto>

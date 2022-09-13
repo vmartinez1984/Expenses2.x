@@ -14,6 +14,9 @@ namespace Expenses.Core.Dtos
         public decimal Amount { get; set; }
 
         [Required]
+        [StringLength(24)]
+        [MaxLength(24)]
+        [PeriodExists]
         public string PeriodId { get; set; }
 
         [Required]

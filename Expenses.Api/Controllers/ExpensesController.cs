@@ -23,7 +23,11 @@ public class ExpensesController : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get([MaxLength(24)][MinLength(24)]string id)
+    public async Task<IActionResult> Get(
+        [MaxLength(24)]
+        [MinLength(24)]
+        string id
+    )
     {
         ExpenseDto item;
 

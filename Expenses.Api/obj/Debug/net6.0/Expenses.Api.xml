@@ -4,6 +4,11 @@
         <name>Expenses.Api</name>
     </assembly>
     <members>
+        <member name="T:Expenses.Api.Controllers.CategoriesController">
+            <summary>
+            Categories
+            </summary>
+        </member>
         <member name="M:Expenses.Api.Controllers.CategoriesController.Get">
             <summary>
             Get list of categories
@@ -48,6 +53,44 @@
             </summary>
             <returns>Id</returns>
             <response code="204">Category updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Get(System.String)">
+            <summary>
+            Get entry by id
+            </summary>
+            <param name="id"></param>
+            <returns>Entry</returns>
+            <response code="200">Entry</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Post(Expenses.Core.Dtos.EntryDtoIn)">
+            <summary>
+            Add Entry
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+            <response code="200">Entry created</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Put(System.String,Expenses.Core.Dtos.EntryDtoIn)">
+            <summary>
+            Update entry
+            </summary>
+            <returns></returns>
+            <response code="202">entry updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Delete(System.String)">
+            <summary>
+            Delete entry
+            </summary>
+            <param name="id">id 24 characteres</param>
+            <returns></returns>
+            <response code="204">entry deleted</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Patch(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Expenses.Core.Dtos.EntryDtoIn})">
+            <summary>
+            Update entry
+            </summary>
+            <returns></returns>
+            <response code="202">entry updated</response>
         </member>
     </members>
 </doc>

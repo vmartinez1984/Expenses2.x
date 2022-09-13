@@ -53,7 +53,7 @@ public class SubcategoriesController : ControllerBase
 
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Put(string id, JsonPatchDocument<SubcategoryDtoIn> json)
+    public async Task<IActionResult> Patch(string id, JsonPatchDocument<SubcategoryDtoIn> json)
     {
         SubcategoryDto item;
 
@@ -69,7 +69,7 @@ public class SubcategoriesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Patch(string id, SubcategoryDtoIn item)
+    public async Task<IActionResult> Put(string id, SubcategoryDtoIn item)
     {
 
         await _unitOfWork.Subcategory.UpdateAsync(id, item);
