@@ -67,6 +67,11 @@ namespace Expenses.Core.Interfaces.BusinessLayer
 
     public interface ICategoryBl : IBaseBl<CategoryDtoIn, CategoryDto>
     {
+        /// <summary>
+        /// Verify if name of category exist
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         bool Exists(string name);
     }
 

@@ -25,6 +25,8 @@ namespace Expenses.Core.Interfaces.Repository
         bool Exists(string periodId);
         Task<PeriodEntity> GetByEntryIdAsync(string entryId);
         Task DeleteEntryAsync(string entryId);
+        Task<string> GetByExpenseIdAsync(string expenseId);
+        Task<PeriodEntity> GetPeriodByExpenseIdAsync(string expenseId);
     }
 
     public interface IBaseRepository<T> where T : class

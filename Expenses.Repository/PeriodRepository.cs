@@ -132,5 +132,27 @@ namespace Expenses.Repository
 
             await UpdateAsync(periodEntity);
         }
+
+        public async Task<string> GetByExpenseIdAsync(string expenseId)
+        {
+            BsonDocument bsonElements;
+            PeriodEntity periodEntity;            
+
+            bsonElements = BsonSerializer.Deserialize<BsonDocument>($"{{'ListExpenses._id': ObjectId('{expenseId}')}}");
+            periodEntity = await _collection.Find(bsonElements).FirstOrDefaultAsync();
+
+            return periodEntity.Id;
+        }
+
+        public async Task<PeriodEntity> GetPeriodByExpenseIdAsync(string expenseId)
+        {
+            BsonDocument bsonElements;
+            PeriodEntity periodEntity;            
+
+            bsonElements = BsonSerializer.Deserialize<BsonDocument>($"{{'ListExpenses._id': ObjectId('{expenseId}')}}");
+            periodEntity = await _collection.Find(bsonElements).FirstOrDefaultAsync();
+
+            return periodEntity;
+        }
     }//end class
 }

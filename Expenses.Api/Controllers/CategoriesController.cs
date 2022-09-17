@@ -132,11 +132,11 @@ public class CategoriesController : ControllerBase
     /// Delete category
     /// </summary>
     /// <returns>Id</returns>
-    /// <response code="204">Category updated</response>
+    /// <response code="204">Category delete</response>
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
-        var item = _unitOfWork.Category.GetAsync(id);
+        CategoryDto item = await _unitOfWork.Category.GetAsync(id);
         if (item is null)
             return NotFound(new { Message = "https://http.cat/404" });
         await _unitOfWork.Category.DeleteAsync(id);

@@ -7,7 +7,7 @@ namespace Expenses.Core.Dtos
     {
         public string Id { get; set; }
 
-        public DateTime DateRegister { get; set; } = DateTime.Now;
+        public DateTime DateRegistration { get; set; } = DateTime.Now;
     }
 
     public class SubcategoryDtoIn

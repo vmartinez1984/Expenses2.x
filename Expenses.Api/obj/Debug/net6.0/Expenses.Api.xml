@@ -52,7 +52,7 @@
             Delete category
             </summary>
             <returns>Id</returns>
-            <response code="204">Category updated</response>
+            <response code="204">Category delete</response>
         </member>
         <member name="M:Expenses.Api.Controllers.EntriesController.Get(System.String)">
             <summary>
@@ -87,10 +87,40 @@
         </member>
         <member name="M:Expenses.Api.Controllers.EntriesController.Patch(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Expenses.Core.Dtos.EntryDtoIn})">
             <summary>
-            Update entry
+            Update entry (falta probar que funciona)
             </summary>
             <returns></returns>
             <response code="202">entry updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Get(System.String)">
+            <summary>
+            Get expense by id
+            </summary>
+            <param name="id">id</param>
+            <returns>Expense</returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Post(Expenses.Core.Dtos.ExpenseDtoIn)">
+            <summary>
+            Add a expense
+            </summary>
+            <param name="item">Expense</param>
+            <returns></returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Put(System.String,Expenses.Core.Dtos.ExpenseDtoIn)">
+            <summary>
+            Update expense
+            </summary>
+            <param name="id">id</param>
+            <param name="item">Expense</param>
+            <returns></returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Delete(System.String)">
+            <summary>
+            delete a expense by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <response code="204">Expense delete</response>
         </member>
     </members>
 </doc>

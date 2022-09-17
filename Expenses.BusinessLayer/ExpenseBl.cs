@@ -49,15 +49,25 @@ namespace Expenses.BusinessLayer
             return entity.CategoryName;
         }
 
-        public async Task<ExpenseDto> GetAsync(string id)
+        public async Task<ExpenseDto> GetAsync(string expenseId)
         {
             ExpenseEntity entity;
             ExpenseDto item;
 
-            entity = await _repository.Period.GetExpenseAsync(id);
+            entity = await _repository.Period.GetExpenseAsync(expenseId);
             item = _mapper.Map<ExpenseDto>(entity);
+            item.PeriodId = await GetPeriodId(expenseId);
 
             return item;
+        }
+
+        private async Task<string> GetPeriodId(string expenseId)
+        {
+            string periodId;
+
+            periodId = await _repository.Period.GetByExpenseIdAsync(expenseId);
+
+            return periodId;
         }
 
         public async Task<List<ExpenseDto>> GetAsync()
@@ -65,9 +75,16 @@ namespace Expenses.BusinessLayer
             throw new NotImplementedException();
         }
 
-        public async Task DeleteAsync(string id)
+        public async Task DeleteAsync(string expenseId)
         {
-            throw new NotImplementedException();
+            PeriodEntity periodEntity;
+            int index;
+
+            periodEntity = await _repository.Period.GetPeriodByExpenseIdAsync(expenseId);
+            index = periodEntity.ListExpenses.FindIndex(x=>x.Id == expenseId);
+            periodEntity.ListExpenses[index].IsActive = false;
+           
+            await _repository.Period.UpdateAsync(periodEntity);
         }
 
         public async Task<List<ExpenseDto>> GetAllAsync(string periodId)
@@ -81,9 +98,19 @@ namespace Expenses.BusinessLayer
             return list;
         }       
 
-        public async Task UpdateAsync(string id, ExpenseDtoIn item)
+        public async Task UpdateAsync(string expenseId, ExpenseDtoIn item)
         {
-            throw new NotImplementedException();
+            PeriodEntity periodEntity;
+            int index;
+
+            periodEntity = await _repository.Period.GetPeriodByExpenseIdAsync(expenseId);
+            index = periodEntity.ListExpenses.FindIndex(x=>x.Id == expenseId);
+            periodEntity.ListExpenses[index].Amount = item.Amount;
+            periodEntity.ListExpenses[index].Name = item.Name;
+            periodEntity.ListExpenses[index].SubcategoryName = item.SubcategoryName;
+            periodEntity.ListExpenses[index].CategoryName = await GetCategoryNameAsync(item.SubcategoryName);
+
+            await _repository.Period.UpdateAsync(periodEntity);
         }
     }
 }

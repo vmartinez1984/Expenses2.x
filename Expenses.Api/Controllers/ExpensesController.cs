@@ -21,7 +21,11 @@ public class ExpensesController : ControllerBase
         _unitOfWork = unitOfWork;
     }
 
-
+    /// <summary>
+    /// Get expense by id
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>Expense</returns>
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(
         [MaxLength(24)]
@@ -38,6 +42,11 @@ public class ExpensesController : ControllerBase
         return Ok(item);
     }
 
+    /// <summary>
+    /// Add a expense
+    /// </summary>
+    /// <param name="item">Expense</param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Post(ExpenseDtoIn item)
     {
@@ -48,22 +57,39 @@ public class ExpensesController : ControllerBase
         return Created($"Api/Expenses/{id}", new { Id = id });
     }
 
+    /// <summary>
+    /// Update expense
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <param name="item">Expense</param>
+    /// <returns></returns>
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [Produces("application/json")]
+    public async Task<IActionResult> Put(
+        [MaxLength(24)]
+        [MinLength(24)]string id, ExpenseDtoIn item)
+    {
+        await _unitOfWork.Expense.UpdateAsync(id, item);
 
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> Put(string id, CategoryDtoIn item)
-    // {
+        return Accepted($"Api/Expenses/{id}", new { Id = id });
+    }
 
-    //     await _unitOfWork.Category.UpdateAsync(id, item);
+    /// <summary>
+    /// delete a expense by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <response code="204">Expense delete</response>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([MaxLength(24)]
+        [MinLength(24)]string id)
+    {
+        ExpenseDto item = await  _unitOfWork.Expense.GetAsync(id);
+        if (item is null)
+            return NotFound(new { Message = "https://http.cat/404" });
+        await _unitOfWork.Expense.DeleteAsync(id);
 
-    //     return Created("/", new { Id = id });
-    // }
-
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> Delete(string id)
-    // {
-
-    //     await _unitOfWork.Category.DeleteAsync(id);
-
-    //     return NoContent();
-    // }
+        return NoContent();
+    }
 }

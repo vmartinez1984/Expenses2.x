@@ -14,9 +14,9 @@ namespace Expenses.Core.Dtos
         public decimal Amount { get; set; }
 
         [Required]
-        [StringLength(24)]
+        [MinLength(24)]
         [MaxLength(24)]
-        [PeriodExists]
+        [PeriodIdExists]
         public string PeriodId { get; set; }
 
         [Required]
@@ -27,18 +27,15 @@ namespace Expenses.Core.Dtos
     public class ExpenseDto
     {
         public string Id { get; set; }
+        
         public DateTime DateRegistration { get; set; }
 
-        [Required]
-        [StringLength(25)]
         public string Name { get; set; }
 
-        [Required]
-        [Range(1, 13000)]
         public decimal Amount { get; set; }
-
-        [Required]
-        [SubcategoryExist]
+        
         public string SubcategoryName { get; set; }
+
+        public string PeriodId { get; set; }
     }
 }

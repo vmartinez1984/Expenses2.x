@@ -16,7 +16,7 @@ namespace Expenses.Core.Dtos
         [Required]
         [MaxLength(24)]
         [MinLength(24)]
-        [PeriodExists]
+        [PeriodIdExists]
         public string PeriodId { get; set; }
     }
 

@@ -6,7 +6,7 @@ namespace Expenses.Core.Entities
 {
     public class BaseBEntity : BaseAEntity
     {
-        public DateTime DateRegister { get; set; } = DateTime.Now;
+        public DateTime DateRegistration { get; set; } = DateTime.Now;
     }
 
     public class BaseAEntity

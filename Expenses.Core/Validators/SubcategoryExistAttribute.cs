@@ -3,6 +3,9 @@ using Expenses.Core.Interfaces.BusinessLayer;
 
 namespace Expenses.Core.Validators
 {
+    /// <summary>
+    /// Verify if category name exist
+    /// </summary>
     public class SubcategoryExistAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
