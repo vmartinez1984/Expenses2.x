@@ -19,6 +19,7 @@ namespace Expenses.Core.Entities
 
         public decimal TotalExpenses
         { get; set; }
+        
 
         public decimal TotalEntries
         { get; set; }

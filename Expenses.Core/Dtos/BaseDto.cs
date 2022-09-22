@@ -5,7 +5,7 @@ namespace Expenses.Core.Dtos
 {
     public class BaseBDto : BaseADto
     {
-        public DateTime DateRegister { get; set; } = DateTime.Now;
+        public DateTime DateRegistration { get; set; } = DateTime.Now;
     }
 
     public class BaseADto
@@ -15,6 +15,6 @@ namespace Expenses.Core.Dtos
 
     public class BaseCDto
     {       
-        public DateTime DateRegister { get; set; } = DateTime.Now;        
+        public DateTime DateRegistration { get; set; } = DateTime.Now;        
     }   
 }

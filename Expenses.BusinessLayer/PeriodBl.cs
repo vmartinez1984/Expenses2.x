@@ -39,7 +39,7 @@ namespace Expenses.BusinessLayer
         {
             bool exists;
 
-            exists =  _repository.Period.Exists(periodId);
+            exists = _repository.Period.Exists(periodId);
 
             return exists;
         }
@@ -50,6 +50,8 @@ namespace Expenses.BusinessLayer
             PeriodDto item;
 
             entity = await _repository.Period.GetAsync(id);
+            entity.TotalEntries = entity.ListEntries.Sum(x => x.Amount);
+            entity.TotalExpenses = entity.ListExpenses.Sum(x => x.Amount);
             item = _mapper.Map<PeriodDto>(entity);
 
             return item;
@@ -61,6 +63,11 @@ namespace Expenses.BusinessLayer
             List<PeriodDto> list;
 
             entities = await _repository.Period.GetAsync();
+            entities.ForEach(entity =>
+            {
+                entity.TotalEntries = entity.ListEntries.Sum(x => x.Amount);
+                entity.TotalExpenses = entity.ListExpenses.Sum(x => x.Amount);
+            });
             list = _mapper.Map<List<PeriodDto>>(entities);
 
             return list;
@@ -72,6 +79,8 @@ namespace Expenses.BusinessLayer
 
             entity = await _repository.Period.GetAsync(id);
             entity.Name = item.Name;
+            entity.TotalEntries = entity.ListEntries.Sum(x => x.Amount);
+            entity.TotalExpenses = entity.ListExpenses.Sum(x => x.Amount);
 
             await _repository.Period.UpdateAsync(entity);
         }

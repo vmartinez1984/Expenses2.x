@@ -4,7 +4,7 @@ namespace Expenses.Core.Dtos
     {
         public string Id { get; set; }
 
-        public DateTime DateRegister { get; set; }
+        public DateTime DateRegistration { get; set; }
     }
 
     public class PeriodDtoIn

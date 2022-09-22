@@ -12,12 +12,14 @@ namespace Expenses.Core.Validators
         {
             bool result;
 
+            if(value is null)
+                return new ValidationResult("La subcategoria no debe ser nula");
             var _unitOfWorkBl = validationContext.GetService(typeof(IUnitOfWork)) as IUnitOfWork;
             result = _unitOfWorkBl.Subcategory.Exists(value.ToString());
             if (result)
                 return ValidationResult.Success;
             else
-                return new ValidationResult("La categoria no existe");
+                return new ValidationResult("La subcategoria no existe");
         }
     }
 }

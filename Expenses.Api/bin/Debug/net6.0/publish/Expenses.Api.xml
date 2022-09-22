@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Expenses.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Expenses.Api.Controllers.CategoriesController">
+            <summary>
+            Categories
+            </summary>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Get">
+            <summary>
+            Get list of categories
+            </summary>
+            <returns></returns>
+            <returns>List of categories</returns>
+            <response code="200">List of categories</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.GetByCategory(System.String)">
+            <summary>
+            Get list of subcategories from category
+            </summary>
+            <param name="categoryId">categoryId 24 characteres</param>
+            <returns>List of subcategories</returns>
+            <response code="200">Subcategories</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Get(System.String)">
+            <summary>
+            Get category by id
+            </summary>
+            <param name="id">categoryId</param>
+            <returns>Category</returns>
+            <response code="200">Category</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Post(Expenses.Core.Dtos.CategoryDtoIn)">
+            <summary>
+            Add category
+            </summary>
+            <returns>Id</returns>
+            <response code="201">Category created</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Put(System.String,Expenses.Core.Dtos.CategoryDtoIn)">
+            <summary>
+            Update category
+            </summary>
+            <returns>Id</returns>
+            <response code="202">Category updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.CategoriesController.Delete(System.String)">
+            <summary>
+            Delete category
+            </summary>
+            <returns>Id</returns>
+            <response code="204">Category delete</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Get(System.String)">
+            <summary>
+            Get entry by id
+            </summary>
+            <param name="id"></param>
+            <returns>Entry</returns>
+            <response code="200">Entry</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Post(Expenses.Core.Dtos.EntryDtoIn)">
+            <summary>
+            Add Entry
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+            <response code="200">Entry created</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Put(System.String,Expenses.Core.Dtos.EntryDtoIn)">
+            <summary>
+            Update entry
+            </summary>
+            <returns></returns>
+            <response code="202">entry updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Delete(System.String)">
+            <summary>
+            Delete entry
+            </summary>
+            <param name="id">id 24 characteres</param>
+            <returns></returns>
+            <response code="204">entry deleted</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.EntriesController.Patch(System.String,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Expenses.Core.Dtos.EntryDtoIn})">
+            <summary>
+            Update entry (falta probar que funciona)
+            </summary>
+            <returns></returns>
+            <response code="202">entry updated</response>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Get(System.String)">
+            <summary>
+            Get expense by id
+            </summary>
+            <param name="id">id</param>
+            <returns>Expense</returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Post(Expenses.Core.Dtos.ExpenseDtoIn)">
+            <summary>
+            Add a expense
+            </summary>
+            <param name="item">Expense</param>
+            <returns></returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Put(System.String,Expenses.Core.Dtos.ExpenseDtoIn)">
+            <summary>
+            Update expense
+            </summary>
+            <param name="id">id</param>
+            <param name="item">Expense</param>
+            <returns></returns>
+        </member>
+        <member name="M:Expenses.Api.Controllers.ExpensesController.Delete(System.String)">
+            <summary>
+            delete a expense by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <response code="204">Expense delete</response>
+        </member>
+    </members>
+</doc>
